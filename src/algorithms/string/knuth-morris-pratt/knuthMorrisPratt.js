@@ -38,12 +38,14 @@ export default function knuthMorrisPratt(text, word) {
   let wordIndex = 0;
 
   const patternTable = buildPatternTable(word);
+  let foundMatch = []; 
 
   while (textIndex < text.length) {
     if (text[textIndex] === word[wordIndex]) {
       // We've found a match.
       if (wordIndex === word.length - 1) {
-        return (textIndex - word.length) + 1;
+        const foundMatchAtIndex = (textIndex - word.length) + 1;
+        foundMatch.push(foundMatchAtIndex);
       }
       wordIndex += 1;
       textIndex += 1;
@@ -54,6 +56,5 @@ export default function knuthMorrisPratt(text, word) {
       textIndex += 1;
     }
   }
-
-  return -1;
+  return foundMatch.length ? foundMatch : -1;
 }
